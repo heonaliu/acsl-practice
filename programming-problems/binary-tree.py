@@ -52,10 +52,16 @@ def find_min(node):
     while current.left is not None:
         current = current.left
     return current
+
+def printTree(node, level=0):
+    if node is not None:
+        printTree(node.right, level + 1)
+        print(' ' * 4 * level + '-> ' + str(node.value))
+        printTree(node.left, level + 1)
     
 
 while True:
-    value = int(input("Enter a value to insert (or -1 to stop), -2 to search: "))
+    value = int(input("Enter a value to insert (or -1 to stop), -2 to search, -3 to print tree, -4 to delete: "))
     if value == -1:
         break
     elif value == -2:
@@ -64,5 +70,10 @@ while True:
             print(f"{search_value} is in the tree.")
         else:
             print(f"{search_value} is not in the tree.")
+    elif value == -3:
+        printTree(root)
+    elif value == -4:
+        delete_value = int(input("Enter a value to delete: "))
+        root = delete(delete_value, root)
     else:
         insert(value, root)
